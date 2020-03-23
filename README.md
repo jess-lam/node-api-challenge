@@ -40,13 +40,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+Express is an unopinionated Node.js web application framework that provides set features that make it easier to create web applications.
+
 - [ ] Describe Middleware?
+
+Middlewares are functions that add extra functionality to our application by extending the features provided by the Express framework.
 
 - [ ] Describe a Resource?
 
+A resource is an object that controls the actions of the endpoints.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+An API will return the resource and the code to act on it. 
+
 - [ ] How can we partition our application into sub-applications?
+
+We partition our application by creating middlewares that handle one aspect of our application. Tasks like authenticaiton and logging are commonly handled by middleware.
 
 ## Minimum Viable Product
 
