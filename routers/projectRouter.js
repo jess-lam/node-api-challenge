@@ -81,6 +81,32 @@ router.put('/:id', validateProjectId, (req, res) => {
 
 //works on Postman
 
+router.post('/:id/actions', [validateProjectId, validateAction], async (req, res) => {
+    const projectInfo = req.body
+  
+      try {
+          const project = await Action.insert(projectInfo);
+          res.status(201).json(project);
+      } catch (err) {
+          console.log(err);
+          res.status(500).json({errorMessage: "status 500 error"})
+  }});
+
+  router.get('/:id/actions', [validateProjectId, validateAction], async (req, res) => {
+    try {
+      const project_id = Number(req.params.id);
+      console.log(typeof project_id);
+      const project = await Project.getProjectActions(project_id);
+      res.status(200).json(project);
+  } catch(err) {
+      console.log(err);
+      res.status(500).json({
+          message: 'Cannot get this resource.'
+      })
+  }
+  });
+
+
 function validateProjectId(req, res, next) {
     const { id } = req.params;
     Project.get(id)
@@ -100,6 +126,17 @@ function validateProjectId(req, res, next) {
         })
     })
 }
+
+function validateAction(req, res, next) {
+    const {id: project_id} = req.params;
+    const {notes} = req.body;
+    const {description} = req.body
+    if(!req.body || !notes || !description) {
+      return res.status(400).json({message: 'Missing action data'})
+    } 
+    req.body = {project_id, notes, description};
+    next();
+  }
 
 
 module.exports = router
