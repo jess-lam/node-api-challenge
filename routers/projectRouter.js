@@ -7,9 +7,9 @@ const router = express.Router();
 
 router.post('/', validateProjectId, (req, res) => {
     const body = req.body;
-    
+
     if(!body.name || !body.description) {
-        res.status(404).json({
+        res.status(400).json({
             errorMessage: 'Please provide a name and description for the project.'
         })
     } else {
@@ -24,7 +24,7 @@ router.post('/', validateProjectId, (req, res) => {
         })
     }
   })
-
+//works on Postman
 
 
 router.get('/:id', validateProjectId, (req, res) => {
@@ -38,6 +38,8 @@ router.get('/:id', validateProjectId, (req, res) => {
         })
     });
 });
+
+//works on Postman
 
 router.delete('/:id', validateProjectId, (req, res) => {
     Project.remove(req.params.id)
@@ -53,12 +55,15 @@ router.delete('/:id', validateProjectId, (req, res) => {
     })
 })
 
+//works on Postman
+
 router.put('/:id', validateProjectId, (req, res) => {
     const body = req.body;
+    console.log(body);
     const { id } = req.params;
 
     if(!body.name || !body.description) {
-        res.status(404).json({
+        res.status(400).json({
             errorMessage: 'Please provide a name and description for the project.'
         });
     } else{
@@ -73,6 +78,8 @@ router.put('/:id', validateProjectId, (req, res) => {
         });
     };
 });
+
+//works on Postman
 
 function validateProjectId(req, res, next) {
     const { id } = req.params;
