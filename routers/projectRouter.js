@@ -24,6 +24,7 @@ router.post('/', validateProjectId, (req, res) => {
         })
     }
   })
+
 //works on Postman
 
 
@@ -92,6 +93,8 @@ router.post('/:id/actions', [validateProjectId, validateAction], async (req, res
           res.status(500).json({errorMessage: "status 500 error"})
   }});
 
+  //works on Postman
+
   router.get('/:id/actions', [validateProjectId, validateAction], async (req, res) => {
     try {
       const project_id = Number(req.params.id);
@@ -106,7 +109,11 @@ router.post('/:id/actions', [validateProjectId, validateAction], async (req, res
   }
   });
 
+  //works on Postman
 
+
+  //custom middleware
+  
 function validateProjectId(req, res, next) {
     const { id } = req.params;
     Project.get(id)

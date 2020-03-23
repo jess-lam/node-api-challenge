@@ -18,6 +18,9 @@ router.get('/:id', validateActionId, (req, res) => {
 
 })
 
+//works on Postman
+
+
 router.delete('/:id', validateActionId, (req, res) => {
     Action.remove(req.params.id)
     .then(resource => {
@@ -31,6 +34,9 @@ router.delete('/:id', validateActionId, (req, res) => {
         })
     })
 })
+
+//works on Postman
+
 router.put('/:id', validateActionId, (req, res) => {
     const { id } = req.params;
     const body= req.body;
@@ -51,6 +57,12 @@ router.put('/:id', validateActionId, (req, res) => {
         });
     };
 });
+
+//works on Postman
+
+
+//custom middleware 
+
 
 function validateActionId(req, res, next) {
     const { id } = req.params;
